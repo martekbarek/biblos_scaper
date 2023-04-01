@@ -7,28 +7,38 @@
 {% block content %}
 
 {% comment %} Make a search when submitted redirect and when ended go back to main page {% endcomment %}
+<div class="container p-5 my-5 border">
+{% comment %} <div class="container p-5 my-5 bg-dark text-white"> {% endcomment %}
 
+    <form action="search/" method="POST">
+        {% csrf_token %}
+        
+        <p class="h3">Author</p>
+        <div class="input-group">
+            <input id="author" type="text" name="author" class="form-control" placeholder="Surname...">
+            <span class="input-group-text"><button type="submit" class="btn">Search</button></span>
+        </div>
+    </form>
 
-<form action="search/" method="POST">
-    {% csrf_token %}
-    <label for="author">Author: </label>
-    <input id="author" type="text" name="author">
-    <input type="submit">
-</form>
+    <br>
+    <br>
 
+    {% if dict %}
+    <table class="table table-striped">
+        <tr>
+            <td>Author</td>
+            <td>Article points</td>
+        </tr>
 
-<table>
-    <tr>
-        <td>Author</td>
-        <td>Article points</td>
-    </tr>
+        {% for author, points in dict.items %}
+        <tr>
+            <td><a href="{% url 'articles' id=author.id %}" class="link-dark">{{author.name}}</a></td>
+            <td>{{points}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
 
-    {% for author, points in dict.items %}
-    <tr>
-        <td><a href="{% url 'articles' id=author.id %}">{{author.name}}</a></td>
-        <td>{{points}}</td>
-    </tr>
-    {% endfor %}
-</table>
+</div>
 
 {% endblock %}

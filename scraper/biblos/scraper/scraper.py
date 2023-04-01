@@ -26,12 +26,15 @@ def get_articles_by_person(name):
         submit_button = driver.find_element("xpath", "/html/body/form/table/tbody/tr[3]/td[2]/center/table/tbody/tr[1]/td[2]/input")
         driver.execute_script("arguments[0].click();", submit_button);
         
-        # WebDriverWait(driver, 25).until(EC.presence_of_element_located(("xpath", "//*[starts-with(@id, 'resultsDiv']")))
-        element = WebDriverWait(driver, 25).until(EC.presence_of_element_located(("xpath", '//*[@id="resultsDiv_16453"]/center/center/table[2]')))
+        # TODO: Find a way to resolve this problem
+        try:
+            WebDriverWait(driver, 25).until(EC.presence_of_element_located(("xpath", '//*[@id="resultsDiv_16453"]/center/center/table[2]')))
+        except:
+            WebDriverWait(driver, 5).until(EC.presence_of_element_located(("xpath", '//*[@id="resultsDiv_16453"]/center/table[2]')))
 
         for row in driver.find_elements('xpath',"//*[starts-with(@id, 'resourceItemTable')]"):
             record = row.get_attribute('innerHTML')
-            raw_data+=record
+            raw_data += record
         
         return raw_data
         
