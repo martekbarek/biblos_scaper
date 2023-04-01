@@ -8,16 +8,15 @@
 
 {% comment %} Make a search when submitted redirect and when ended go back to main page {% endcomment %}
 
-
 {% comment %} results {% endcomment %}
 
 <a href='/'>Main page </a>
 
 {% for article in articles %}
-    <p id="article">{{article.title}}</p>
-    <p id="article">{{article.authors}}</p>
-    <p id="article">{{article.ext_authors}}</p>
-    <p id="article">{{article.release_date}}</p>
+    <p id="article">Title: {{article.title}}</p>
+    <p id="article">Authors: {{article.authors}} {{article.ext_authors}}</p>
+    <p id="article">Release date: {{article.release_date}}</p>
+    <p id="article">Points: {{article.points}}</p>
 {% endfor %} 
 
 {% endblock %}
