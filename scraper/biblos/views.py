@@ -30,6 +30,7 @@ def search(request):
     if request.method == 'POST':
         author = request.POST.get('author')
         # make author take surname and first letter
+        
         raw_articles = get_articles_by_person(author)
         articles = extract_data(raw_articles)
 
@@ -38,7 +39,10 @@ def search(request):
         
         for article in articles:
             try:
-                query_name = [n for n in article.authors if author in n][0].strip().split(',')[0]
+                list_name = [n for n in article.authors if author in n][0].strip().split(',')
+                surname = list_name[0]
+                name = list_name[1].strip()[0]
+                query_name = surname + " " +name
             except:
                 continue
                 
