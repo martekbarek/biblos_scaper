@@ -40,7 +40,6 @@ def search(request):
             try:
                 query_name = [n for n in article.authors if author in n][0].strip().split(',')[0]
             except:
-                # Author is not related with given Article
                 continue
                 
             if Author.objects.filter(name__startswith=query_name).exists():
@@ -48,15 +47,9 @@ def search(request):
             else:
                 author_object = Author.objects.create(name=query_name)
 
-            # concatenate exteranal authors with pk
             if not Article.objects.filter(title=article.title, author=author_object).exists():
                 Article.objects.create(author=author_object, authors=";".join(article.authors), ext_authors=";".join(article.ext_authors), title=article.title, release_data=article.release_data, typ=article.typ, series=article.series, points=article.points)
-            else:
-                Article.objects.create(author=author_object, authors=";".join(article.authors), ext_authors=";".join(article.ext_authors), title=article.title, release_data=article.release_data, typ=article.typ, series=article.series, points=article.points)
-
-            # Article.objects.get_or_create(
-            #     author=author_object, authors=";".join(article.authors), ext_authors=";".join(article.ext_authors), title=article.title, release_data=article.release_data, typ=article.typ, series=article.series, points=article.points)
-
+        
         context = {"articles": articles}
 
     return render(request, 'biblos/search.html', context=context)
