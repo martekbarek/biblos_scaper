@@ -13,8 +13,8 @@
 
 <a href='/'>Main page </a>
 
-{% comment %} {% for article in articles %}
-    <p id="article">{{article}}</p>
-{% endfor %} {% endcomment %}
+{% for article in articles %}
+    <p id="article">{{article.title}}</p>
+{% endfor %} 
 
 {% endblock %}

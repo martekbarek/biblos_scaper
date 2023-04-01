@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-
+from .scraper.scraper import get_articles_by_person, extract_data 
 # Create your views here.
 
 from django.http import HttpResponse
@@ -16,7 +16,10 @@ def search(request):
     # page for results, there will be an button to redirect to main page
     
     if request.method == 'POST':
+        raw_articles = get_articles_by_person("Wojnar")
+        articles=extract_data(raw_articles)
         # loading page and redirecting or task in the background
         print(request)
+        context = { "articles": articles }
         
-    return render(request, 'biblos/search.html')
+    return render(request, 'biblos/search.html', context=context)
