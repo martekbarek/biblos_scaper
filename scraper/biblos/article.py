@@ -11,7 +11,7 @@ class Article():
         self.impact = None
     
     def __str__(self):
-        return f"Title: {self.title}\nAuthors: {self.authors}\nExt_authors: {self.ext_authors}\nType: {self.typ}\nSeries: {self.series}\nRelease data: {self.release_data}\nPoints: {self.points}\nImpact: {self.impact}\nMNiWS list: {self.mnisw_list}"
+        return f"Title: {self.title}\nAuthors: {self.authors}\nExt_authors: {self.ext_authors}\nType: {self.typ}\nSeries: {self.series}\nRelease date: {self.release_date}\nPoints: {self.points}\nImpact: {self.impact}\nMNiWS list: {self.mnisw_list}"
     
     # Builder pattern
     def add_title(self,title):
@@ -24,8 +24,8 @@ class Article():
         self.typ=typ
     def add_series(self,series):
         self.series=series
-    def add_release_data(self,release_data):
-        self.release_data=release_data
+    def add_release_date(self,release_date):
+        self.release_date=release_date
     def add_points(self,points):
         self.points=points
     def add_mnisw_list(self,mnisw_list):

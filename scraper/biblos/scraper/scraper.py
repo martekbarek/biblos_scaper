@@ -85,8 +85,8 @@ def parse_html_data(articles_html):
         art.add_title(title)
         art.add_typ(typ)
         art.add_points(points)
-        art.add_points(series)
-        art.add_release_data(release_date)
+        art.add_series(series)
+        art.add_release_date(release_date)
         art.add_impact(impact)
         art.add_mnisw_list(mnisw_list)
         
@@ -146,7 +146,7 @@ def extract_data(raw_data):
         article.add_points(points)
         article.add_mnisw_list(mnisw_list)
         article.add_impact(impact)
-        article.add_release_data(release_date)
+        article.add_release_date(release_date)
         
         articles.append(article)
                     

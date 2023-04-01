@@ -16,10 +16,14 @@ def search(request):
     # page for results, there will be an button to redirect to main page
     
     if request.method == 'POST':
-        raw_articles = get_articles_by_person("Wojnar")
+        author = request.POST.get('author')
+        raw_articles = get_articles_by_person(author)
         articles=extract_data(raw_articles)
         # loading page and redirecting or task in the background
         print(request)
         context = { "articles": articles }
         
     return render(request, 'biblos/search.html', context=context)
+
+
+# view for certain person data
