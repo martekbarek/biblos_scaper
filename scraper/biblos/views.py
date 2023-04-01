@@ -12,11 +12,9 @@ def dashboard(request):
 
     return render(request, 'biblos/dashboard.html', dict())
 
+
 # change name to results
-
-
 def search(request):
-    # page for results, there will be an button to redirect to main page
 
     if request.method == 'POST':
         author = request.POST.get('author')
@@ -25,16 +23,17 @@ def search(request):
 
         for article in articles:
 
-            query_name = [n for n in article.authors if author in n]
+            query_name = [n for n in article.authors if author in n][0].strip().split(',')[
+                0]
 
-            if Author.objects.filter(name=query_name).exists():
-                author_object = Author.objects.filter(name=query_name[0])
+            if Author.objects.filter(name__startswith=query_name).exists():
+                author_object = Author.objects.filter(name=query_name).first()
             else:
-                author_object = Author.objects.create(name=query_name[0])
+                author_object = Author.objects.create(name=query_name)
 
-            # concatenate exteranal authors with pk 
-            Article.objects.create(
-                author=author_object, title=article.title, release_data=article.release_data, typ=article.typ, series=article.series,points=article.points)
+            # concatenate exteranal authors with pk
+            Article.objects.get_or_create(
+                author=author_object, title=article.title, release_data=article.release_data, typ=article.typ, series=article.series, points=article.points)
 
         context = {"articles": articles}
 
