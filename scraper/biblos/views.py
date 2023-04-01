@@ -9,8 +9,19 @@ from django.http import HttpResponse
 def dashboard(request):
 
     # add list of already fetched persons' articles
+    
+    authors = Author.objects.all()
+    
+    dict = {}
+    
+    for author in authors:
+        articles = Article.objects.filter(author=author, points__gt=0)
+        points = 0
+        for article in articles:
+            points+=article.points
+        dict.update({ author : points })
 
-    return render(request, 'biblos/dashboard.html', dict())
+    return render(request, 'biblos/dashboard.html', context={'dict' : dict})
 
 
 # change name to results
@@ -23,8 +34,7 @@ def search(request):
 
         for article in articles:
 
-            query_name = [n for n in article.authors if author in n][0].strip().split(',')[
-                0]
+            query_name = [n for n in article.authors if author in n][0].strip().split(',')[0]
 
             if Author.objects.filter(name__startswith=query_name).exists():
                 author_object = Author.objects.filter(name=query_name).first()
@@ -33,7 +43,7 @@ def search(request):
 
             # concatenate exteranal authors with pk
             Article.objects.get_or_create(
-                author=author_object, title=article.title, release_data=article.release_data, typ=article.typ, series=article.series, points=article.points)
+                author=author_object, authors=";".join(article.authors), ext_authors=";".join(article.ext_authors), title=article.title, release_data=article.release_data, typ=article.typ, series=article.series, points=article.points)
 
         context = {"articles": articles}
 
@@ -41,3 +51,15 @@ def search(request):
 
 
 # view for certain person data
+def author_view(request, id):
+    
+    author = Author.objects.filter(id=id).first()
+        
+    articles = Article.objects.filter(author=author, points__gt=0)
+    points = 0
+    for article in articles:
+        points+=article.points
+    context = dict({ "author" : author, "articles":articles, "points": points })
+
+    return render(request, 'biblos/author_view.html', context=context)
+
