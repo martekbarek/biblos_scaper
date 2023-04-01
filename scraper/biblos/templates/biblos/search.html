@@ -6,24 +6,35 @@
 
 {% block content %}
 
-{% comment %} Make a search when submitted redirect and when ended go back to main page {% endcomment %}
+<div class="container p-5 my-5 border">
+    <a href='/' class="link-dark">Main page &gt;&gt;</a>
+    <br>
+    <br>
+    <p class="h1" class="text-align: center"><b>Results of search</b></p>
 
-{% comment %} results {% endcomment %}
+    <div class="alert alert-warning" role="alert">
+        <b>Warning!</b> These are result of given search, go to main page to look for certain author's articles
+    </div>
+    
+    {% if articles %}
+        {% for article in articles %}
+            <div class="card" style="padding:10px; margin: 10px">
+                <table class="table table-striped" >
+                    <tr><td><p id="article"><b>Title: </b>{{article.title}}</p></td></tr>
+                    <tr><td><p id="article"><b>Authors: </b>{{article.authors}}{% if article.ext_authors %}, {{article.ext_authors}}{% endif %}</p></td></tr>
+                    {% if article.release_date %}<tr><td><p id="article"><b>Release date: </b>{{article.release_date}}</p></td></tr>{% endif %}
+                    {% if article.typ %}<tr><td><p id="article"><b>Typ: </b>{{article.typ}}</p></td></tr>{% endif %}
+                    {% if article.series %}<tr><td><p id="article"><b>Series: </b>{{article.series}}</p></td></tr>{% endif %}
+                    {% if article.points %}<tr><td><p id="article"><b>Points: </b>{{article.points}}</p></td></tr>{% endif %}
+                    {% if article.impact %}<tr><td><p id="article"><b>Impact: </b>{{article.impact}}</p></td></tr>{% endif %}
+                    {% if article.mnisw_list %}<tr><td><p id="article"><b>MNiSW: </b>{{article.mnisw_list}}</p></td></tr>{% endif %}
+                </table>
+            </div>
+        {% endfor %} 
+    {% endif %}
 
-<a href='/'>Main page </a>
+    <a href='/' class="link-dark">Main page &gt;&gt;</a>
 
-{% if articles %}
-    {% for article in articles %}
-        <p id="article">Title: {{article.title}}</p>
-        <p id="article">Authors: {{article.authors}}{% if article.ext_authors %}, {{article.ext_authors}}{% endif %}</p>
-        {% if article.release_date %}<p id="article">Release date: {{article.release_date}}</p>{% endif %}
-        {% if article.typ %}<p id="article">Typ: {{article.typ}}</p>{% endif %}
-        {% if article.series %}<p id="article">Series: {{article.series}}</p>{% endif %}
-        {% if article.points %}<p id="article">Points: {{article.points}}</p>{% endif %}
-        {% if article.impact %}<p id="article">Impact: {{article.impact}}</p>{% endif %}
-        {% if article.mnisw_list %}<p id="article">MNiSW: {{article.mnisw_list}}</p>{% endif %}
-        <hr>
-    {% endfor %} 
-{% endif %}
+</div>
 
 {% endblock %}
