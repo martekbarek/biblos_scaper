@@ -11,10 +11,9 @@ class Author(models.Model):
 
 class Article(models.Model):
 
-    # searched author
+    # author from Search
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    
-    title = models.CharField(max_length = 200, unique = True)
+    title = models.CharField(max_length = 200)
     authors = models.CharField(max_length = 200, blank=True, null=True)
     ext_authors = models.CharField(max_length = 200, blank=True, null=True)
     typ = models.CharField(max_length = 200, blank=True, null=True)

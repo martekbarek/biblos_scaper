@@ -29,21 +29,33 @@ def search(request):
 
     if request.method == 'POST':
         author = request.POST.get('author')
+        # make author take surname and first letter
         raw_articles = get_articles_by_person(author)
         articles = extract_data(raw_articles)
 
+        if not articles:
+            return render(request, 'biblos/dashboard.html')
+        
         for article in articles:
-
-            query_name = [n for n in article.authors if author in n][0].strip().split(',')[0]
-
+            try:
+                query_name = [n for n in article.authors if author in n][0].strip().split(',')[0]
+            except:
+                # Author is not related with given Article
+                continue
+                
             if Author.objects.filter(name__startswith=query_name).exists():
                 author_object = Author.objects.filter(name=query_name).first()
             else:
                 author_object = Author.objects.create(name=query_name)
 
             # concatenate exteranal authors with pk
-            Article.objects.get_or_create(
-                author=author_object, authors=";".join(article.authors), ext_authors=";".join(article.ext_authors), title=article.title, release_data=article.release_data, typ=article.typ, series=article.series, points=article.points)
+            if not Article.objects.filter(title=article.title, author=author_object).exists():
+                Article.objects.create(author=author_object, authors=";".join(article.authors), ext_authors=";".join(article.ext_authors), title=article.title, release_data=article.release_data, typ=article.typ, series=article.series, points=article.points)
+            else:
+                Article.objects.create(author=author_object, authors=";".join(article.authors), ext_authors=";".join(article.ext_authors), title=article.title, release_data=article.release_data, typ=article.typ, series=article.series, points=article.points)
+
+            # Article.objects.get_or_create(
+            #     author=author_object, authors=";".join(article.authors), ext_authors=";".join(article.ext_authors), title=article.title, release_data=article.release_data, typ=article.typ, series=article.series, points=article.points)
 
         context = {"articles": articles}
 
