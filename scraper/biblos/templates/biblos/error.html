@@ -1,0 +1,15 @@
+{% extends 'biblos/base.html' %}
+
+
+{% block title %}404{% endblock %}
+
+
+{% block content %}
+
+{% comment %} Make a search when submitted redirect and when ended go back to main page {% endcomment %}
+<div class="container p-5 my-5 border" style="text-align:center">
+    <p class="h3">Cannot get articles for <b>{{query}}</b>!</p>
+</div>
+<a href='/' class="link-dark" style="margin-left: 30px">Main page &gt;&gt;</a>
+
+{% endblock %}
