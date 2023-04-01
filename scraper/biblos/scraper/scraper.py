@@ -4,13 +4,20 @@ from selenium.webdriver.support import expected_conditions as EC
 import re
 from bs4 import BeautifulSoup
 from ..article import Article
-
+import platform
 
 # TODO:SINGLETON??
 
 def get_articles_by_person(name):
-    driver = webdriver.Chrome('./drivers/chromedriver')
-
+    
+    match platform.system():
+        case 'Darwin':
+            driver = webdriver.Chrome('./drivers_111/chrome_mac_arm')
+        case 'Windows':
+            driver = webdriver.Chrome('./drivers_111/chrome_win.exe')
+        case 'Linux':
+            driver = webdriver.Chrome('./drivers_111/chrome_linux')
+    
     try:
         raw_data = ""
         

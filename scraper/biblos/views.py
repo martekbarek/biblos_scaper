@@ -12,6 +12,7 @@ def dashboard(request):
     
     return render(request, 'biblos/dashboard.html',dict())
 
+# change name to results
 def search(request):
     # page for results, there will be an button to redirect to main page
     
