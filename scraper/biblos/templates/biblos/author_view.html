@@ -1,0 +1,26 @@
+{% extends 'biblos/base.html' %}
+
+
+{% block title %}Author view{% endblock %}
+
+
+{% block content %}
+
+<p>Name: {{author.name}} Points: {{points}}</p>
+
+{% for article in articles %}
+    <p id="article">Title: {{article.title}}</p>
+    <p id="article">Authors: {{article.authors}}{% if article.ext_authors %}, {{article.ext_authors}}{% endif %}</p>
+    {% if article.release_date %}<p id="article">Release date: {{article.release_date}}</p>{% endif %}
+    {% if article.typ %}<p id="article">Typ: {{article.typ}}</p>{% endif %}
+    {% if article.series %}<p id="article">Series: {{article.series}}</p>{% endif %}
+    {% if article.points %}<p id="article">Points: {{article.points}}</p>{% endif %}
+    {% if article.impact %}<p id="article">Impact: {{article.impact}}</p>{% endif %}
+    {% if article.mnisw_list %}<p id="article">MNiSW: {{article.mnisw_list}}</p>{% endif %}
+    <hr>
+{% endfor %} 
+
+<a href='/'>Main page </a>
+
+
+{% endblock %}

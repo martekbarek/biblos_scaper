@@ -1,2 +1,7 @@
 __pycache__/
-*.sqlite3
+scraper/db.sqlite3
+.vscode
+
+scraper/biblos/__pycache__/*
+scraper/biblos/scraper/__pycache__/*
+scraper/biblos/migrations/*

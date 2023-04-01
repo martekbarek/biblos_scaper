@@ -105,7 +105,7 @@ def parse_html_data(articles_html):
 def extract_data(raw_data):
     articles = []
     
-    documents = BeautifulSoup(raw_data).find_all('tbody')
+    documents = BeautifulSoup(raw_data, features="html.parser").find_all('tbody')
 
     for document in documents:
         soup_title = document.find_all('b')[0]    
