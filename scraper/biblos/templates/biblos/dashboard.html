@@ -16,12 +16,13 @@
         <p class="h3">Author</p>
         <div class="input-group">
             <input id="author" type="text" name="author" class="form-control" placeholder="Surname...">
-            <span class="input-group-text"><button type="submit" class="btn">Search</button></span>
+            <span class="input-group-text"><button type="submit" class="btn" onClick=BlurPage()>Search</button></span>
         </div>
     </form>
 
     <br>
     <br>
+    <div class="spinner-border text-muted" style="top: 50%;left: 50%;position: fixed; display: None; z-index:10;" id="loader"></div>
 
     {% if dict %}
     <table class="table table-striped">
@@ -40,5 +41,14 @@
     {% endif %}
 
 </div>
+
+<script>
+function BlurPage(){
+    $('body').css("opacity","0.1");
+    const targetDiv = document.getElementById("loader");
+    targetDiv.style.display = "block";
+}
+    
+</script>
 
 {% endblock %}
