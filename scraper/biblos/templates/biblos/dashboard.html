@@ -28,13 +28,15 @@
     <table class="table table-striped">
         <tr>
             <td>Author</td>
-            <td>Article points</td>
+            <td>Count of articles</td>
+            <td>Points</td>
         </tr>
 
-        {% for author, points in dict.items %}
+        {% for author, values in dict.items %}
         <tr>
             <td><a href="{% url 'articles' id=author.id %}" class="link-dark">{{author.name}}</a></td>
-            <td>{{points}}</td>
+            <td>{{values.1}}</td>
+            <td>{{values.0}}</td>
         </tr>
         {% endfor %}
     </table>

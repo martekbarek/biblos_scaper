@@ -17,7 +17,9 @@ def dashboard(request):
         points = 0
         for article in articles:
             points+=article.points
-        dict.update({ author : points })
+        articles_count = articles.count()
+        if points>0:
+            dict.update({ author : [points,articles_count] })
 
     return render(request, 'biblos/dashboard.html', context={'dict' : dict})
 
