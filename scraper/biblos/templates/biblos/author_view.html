@@ -19,7 +19,7 @@
         <div class="card" style="padding:10px; margin: 10px">
             <table class="table table-striped" >
                 <tr><td><p id="article"><b>Title: </b>{{article.title}}</p></td></tr>
-                <tr><td><p id="article"><b>Authors: </b>{{article.authors}}{% if article.ext_authors %}, {{article.ext_authors}}{% endif %}</p></td></tr>
+                <tr><td><p id="article"><b>Authors: </b>{{article.authors}}{% if article.ext_authors %};{{article.ext_authors}}{% endif %}</p></td></tr>
                 {% if article.release_date %}<tr><td><p id="article"><b>Release date: </b>{{article.release_date}}</p></td></tr>{% endif %}
                 {% if article.typ %}<tr><td><p id="article"><b>Typ: </b>{{article.typ}}</p></td></tr>{% endif %}
                 {% if article.series %}<tr><td><p id="article"><b>Series: </b>{{article.series}}</p></td></tr>{% endif %}
