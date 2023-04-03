@@ -28,7 +28,7 @@ def get_articles_by_person(name):
         
         # TODO: Find a way to resolve this problem
         try:
-            WebDriverWait(driver, 25).until(EC.presence_of_element_located(("xpath", '//*[@id="resultsDiv_16453"]/center/center/table[2]')))
+            WebDriverWait(driver, 15).until(EC.presence_of_element_located(("xpath", '//*[@id="resultsDiv_16453"]/center/center/table[2]')))
         except:
             WebDriverWait(driver, 5).until(EC.presence_of_element_located(("xpath", '//*[@id="resultsDiv_16453"]/center/table[2]')))
 

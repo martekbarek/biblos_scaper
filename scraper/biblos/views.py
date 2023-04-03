@@ -30,7 +30,8 @@ def search(request):
             articles = extract_data(raw_articles)
 
             if not articles:
-                return render(request, 'biblos/dashboard.html')
+                return render(request, 'biblos/error.html', context=dict({"query": author}))
+
 
             for article in articles:
                 try:
