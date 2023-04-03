@@ -13,7 +13,8 @@
     <p class="h1" class="text-align: center"><b>Articles</b></p>
     <hr>
     <p class="h3"><b>Surname: </b>{{author.name}}</p>
-    <p class="h3"><b>Points: </b>{{points}}</p>
+    {% if points %}<p class="h3"><b>Points: </b>{{points}}</p>{% endif %}
+    {% if new_points %}<p class="h3"><b>New points*: </b>{{new_points}}</p>{% endif %}
 
     {% for article in articles %}
         <div class="card" style="padding:10px; margin: 10px">
@@ -30,6 +31,7 @@
         </div>
     {% endfor %} 
 
+    {% if new_points %}<p class="h7" style="color:grey;"><b>*Points granted after 2019</b></p>{% endif %}
     <a href='/' class="link-dark">Main page &gt;&gt;</a>
 
 </div>

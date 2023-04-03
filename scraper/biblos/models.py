@@ -18,7 +18,7 @@ class Article(models.Model):
     ext_authors = models.CharField(max_length = 200, blank=True, null=True)
     typ = models.CharField(max_length = 200, blank=True, null=True)
     series = models.CharField(max_length = 200, blank=True, null=True)
-    release_data = models.CharField(max_length = 200, blank=True, null=True)
+    release_date = models.CharField(max_length = 200, blank=True, null=True)
     points = models.IntegerField(blank=True, null=True)
     mnisw_list = models.CharField(max_length = 200, blank=True, null=True)
     impact = models.CharField(max_length = 200, blank=True, null=True)

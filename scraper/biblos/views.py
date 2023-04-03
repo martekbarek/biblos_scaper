@@ -50,7 +50,7 @@ def search(request):
 
                 if not Article.objects.filter(title=article.title, author=author_object).exists():
                     Article.objects.create(author=author_object, authors=";".join(article.authors), ext_authors=";".join(
-                        article.ext_authors), title=article.title, release_data=article.release_data, typ=article.typ, series=article.series, points=article.points)
+                        article.ext_authors), title=article.title, release_date=article.release_date, typ=article.typ, series=article.series, points=article.points)
 
             context = {"articles": articles}
         except:
@@ -65,9 +65,17 @@ def author_view(request, id):
 
     articles = Article.objects.filter(author=author, points__gt=0)
     points = 0
+    new_points = 0
     for article in articles:
-        points += article.points
-    context = dict({"author": author, "articles": articles, "points": points})
+        if article.release_date:
+            if int(article.release_date)>=2019:
+                new_points += article.points
+            else:
+                points += article.points
+        else:
+            points += article.points
+            
+    context = dict({"author": author, "articles": articles, "points": points, "new_points": new_points})
 
     return render(request, 'biblos/author_view.html', context=context)
 
