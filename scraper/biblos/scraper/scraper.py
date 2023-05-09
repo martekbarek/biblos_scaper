@@ -6,8 +6,6 @@ from bs4 import BeautifulSoup
 from ..article import Article
 import platform
 
-# TODO:SINGLETON??
-
 def get_articles_by_person(name):
     
     match platform.system():

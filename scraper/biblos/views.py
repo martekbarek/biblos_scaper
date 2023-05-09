@@ -20,7 +20,6 @@ def dashboard(request):
     return render(request, 'biblos/dashboard.html', context={'dict': dict})
 
 
-# TODO:change name to results
 def search(request):
 
     if request.method == 'POST':

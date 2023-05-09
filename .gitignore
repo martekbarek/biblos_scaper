@@ -1,6 +1,7 @@
 __pycache__/
 scraper/db.sqlite3
 .vscode
+.DS_Store
 
 scraper/biblos/__pycache__/*
 scraper/biblos/scraper/__pycache__/*
